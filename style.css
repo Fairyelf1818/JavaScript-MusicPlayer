@@ -160,3 +160,10 @@ body{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.musicilist{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: var(--white);
+}
