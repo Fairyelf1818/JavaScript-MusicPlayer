@@ -25,6 +25,7 @@ body{
 }
 .wrapper{
     width: 360px;
+    overflow: hidden;
     position: relative;
     border-radius: 15px;
     padding: 25px;
@@ -166,12 +167,21 @@ body{
 .music-list{
     position: absolute; 
     left: 0;
-    bottom: 0;
+    bottom: -55%;
+    opacity: 0;
+    pointer-events: none;
     width: 100%;
     padding: 15px 30px;
     border-radius: 15px;
     background: var(--white);
     box-shadow: 0px -5px 10px rgba(0,0,0,0.1);
+    transition: all 0.14s ease-out; 
+}
+/* We'll use this show class in javascript */
+.music-list.show{
+    bottom: 0;
+    opacity: 1;
+    pointer-events: auto;
 }
 .music-list .header .row{
     display: flex;
@@ -191,7 +201,29 @@ body{
 }
 .music-list ul{
     margin: 10px 0;
+    max-height: 260px;
+    overflow-y: auto;
+}
+.music-list ul::-webkit-scrollbar{
+    width: 0px;
 }
 .music-list ul li{
-
+    cursor: pointer;
+    list-style: none;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    color: var(--lightblack);
+    border-bottom: 1px solid #e5e5e5;
+}
+.music-list ul li:last-child{
+    border-bottom: 0px;
+}
+.music-list ul li .row span{
+    font-size: 17px;
+}
+ul li .row p{
+    opacity: 0.9;
+}
+ul li .audio-duration{
+    font-size: 16px; 
 }
