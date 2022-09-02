@@ -1,24 +1,24 @@
-let allmusic = [
+let allMusic = [
     {
-        name: "Eminem - Kamikaze",
+        name: "Kamikaze",
         artist: "Eminem",
         img: "kamikaze",
-        src: "kamizaze"
+        src: "kamikaze"
     },
     {
-        name: "Nicki Minaj - Bussin",
+        name: "Bussin",
         artist: "Nicki Minaj",
         img: "bussin",
         src: "bussin"
     },
     {
-        name: "Nicki - Do We Have A Problem?",
+        name: "Do We Have A Problem?",
         artist: "Nicki Minaj",
-        img: "dhwap",
-        src: "dhwap"
+        img: "dwhap",
+        src: "dwhap"
     },
     {
-        name: "Nicki - Super Freaky Girl",
+        name: "Super Freaky Girl",
         artist: "Nicki Minaj",
         img: "superfreakygirl",
         src: "sfg"
