@@ -168,6 +168,18 @@ function nextMusic() {
 
     // If the music index is greater than length of array then music index shall be 1
     musicIndex > allMusic.length ? musicIndex = 1 : musicIndex = musicIndex;
+
+    let shuffletest = repeatBtn.innerText;
+
+    if (shuffletest =="shuffle"){ // This checks to see if shuffle is enabled, if it is then the enxt song is randomized
+        do {
+            randomindex = Math.floor((Math.random() * allMusic.length) + 1); // This runs until random number isnt the same as current index
+        } while (musicIndex == randomindex);
+        musicIndex = randomindex; // Passing the random index into music index so a random song will be played
+        loadMusic(musicIndex); // Remember to call the laod music function
+        playMusic(); // and also play music
+        playingNow();
+    }
     loadMusic(musicIndex);
     playMusic();
 }
