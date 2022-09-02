@@ -6,20 +6,20 @@ let allmusic = [
         src: "kamizaze"
     },
     {
-        name: "Nicki - Bussin",
-        artist: "Nicki",
+        name: "Nicki Minaj - Bussin",
+        artist: "Nicki Minaj",
         img: "bussin",
         src: "bussin"
     },
     {
-        name: "Nicki - dhwap",
-        artist: "Nicki",
+        name: "Nicki - Do We Have A Problem?",
+        artist: "Nicki Minaj",
         img: "dhwap",
         src: "dhwap"
     },
     {
         name: "Nicki - Super Freaky Girl",
-        artist: "Nicki",
+        artist: "Nicki Minaj",
         img: "superfreakygirl",
         src: "superfreakygirl"
     }    
