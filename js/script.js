@@ -1,4 +1,4 @@
-// Declaration of all required elements 
+// Declaration of MOST required elements 
 const wrapper = document.querySelector(".wrapper"),
     musicImg = wrapper.querySelector(".img-area img"),
     musicName = wrapper.querySelector(".song-details .name"),
@@ -7,7 +7,14 @@ const wrapper = document.querySelector(".wrapper"),
     playPauseBtn = wrapper.querySelector(".play-pause"),
     prevBtn = wrapper.querySelector("#prev"),
     nextBtn = wrapper.querySelector("#next"),
-    progressBar = wrapper.querySelector(".progress-bar");
+    progressBar = wrapper.querySelector(".progress-bar"),
+    progressArea = wrapper.querySelector(".progress-area"),
+    repeatBtn = wrapper.querySelector("#repeat-plist"),
+    musicList = wrapper.querySelector(".music-list"),
+    showMoreBtn = wrapper.querySelector("#more-music"),
+    hideMusicBtn = musicList.querySelector("#close"),
+    ulTag = wrapper.querySelector("ul");
+    
 
 let musicIndex = 1;
 
@@ -59,7 +66,67 @@ mainAudio.addEventListener("timeupdate", (e) => {
     }
     musicCurrentTime.innerText = `${currentmin}:${currentsec}`;
 });
+// 6. An attempt to update the song`s current play time with progress bar width
+progressArea.addEventListener("click", (e) => {
+    let progressWidthval = progressArea.clientWidth; //retrieves width of progress bar
+    let clickedOffSetX = e.offsetX; // getting the offset value of x
+    let songDuration = mainAudio.duration; // and we have to get the song`s duration
 
+    mainAudio.currentTime = (clickedOffSetX / progressWidthval) * songDuration;
+    playMusic();
+});
+// 7. Working on repeat and shuffle button
+repeatBtn.addEventListener("click", () => {
+    // So now it would be best to get the innertext of the icon and change as needed
+    let gettxt = repeatBtn.innerText;
+    // And do changes on it using a switch
+    switch (gettxt) {
+        case "repeat": // Happens if the icon is called repeat
+            repeatBtn.innerText = "repeat_one";
+            repeatBtn.setAttribute("title", "Song Looped");
+            break;
+        case "repeat_one": // Happens if the icon is called repeat_one
+            repeatBtn.innerText = "shuffle"
+            repeatBtn.setAttribute("title", "Playlist Shuffled");
+            break;
+        case "shuffle": // Happens if the icon is called shuffle
+            repeatBtn.innerText = "repeat"
+            repeatBtn.setAttribute("title", "Playlist Looped");
+    }
+});
+// 8. Working on what the program should do once the song had ended
+mainAudio.addEventListener("ended", () => {
+    let gettxt = repeatBtn.innerText; // Time to get inner text again
+
+    switch (gettxt) {
+        case "repeat": // If the icon says repeat then please just call the next music function so the next song can be played
+            nextMusic();
+            break;
+        case "repeat_one": // If it says repeat once the say current song
+            mainAudio.currentTime = 0;
+            loadMusic(musicIndex);
+            playMusic();
+            break;
+        case "shuffle": // If it says shuffle then it randomly generates an index number within array number
+            let randomindex = Math.floor((Math.random() * allMusic.length) + 1);
+            do {
+                randomindex = Math.floor((Math.random() * allMusic.length) + 1); // This runs until random number isnt the same as current index
+            } while (musicIndex == randomindex);
+            musicIndex = randomindex; // Passing the random index into music index so a random song will be played
+            loadMusic(musicIndex); // Remember to call the laod music function
+            playMusic(); // and also play music
+            //DO NEXT BUTTON EVENT LISTEN TO FIX SHUFFLE A REMINDER
+            break;
+    }
+});
+// 9. Shows music queue
+showMoreBtn.addEventListener("click",()=>{
+    musicList.classList.toggle("show");
+});
+// 10. Hides music queue
+hideMusicBtn.addEventListener("click",()=>{
+    showMoreBtn.click();
+});
 
 //ALL FUNCTIONS
 // 1.This function loads the music and inforation about it
@@ -99,4 +166,28 @@ function nextMusic() {
     loadMusic(musicIndex);
     playMusic();
 }
+// MISC
+// 1. Time to create lists according to array length
+for(let i =0; i<allMusic.length; i++){
+    let liTag =`<li>
+    <div class="row">
+        <span>${allMusic[i].name}</span>
+        <p>${allMusic[i].artist}</p>
+    </div>
+    <audio class="${allMusic[i].src}" src="songs/${allMusic[i].src}.m4a"></audio>
+    <span id="${allMusic[i].src}" class="audio-duration"></span>
+</li>`;
+ulTag.insertAdjacentHTML("beforeend", liTag);
+let liAudioDuration = ulTag.querySelector(`#${allMusic[i].src}`);
+let liAudioTag = ulTag.querySelector(`.${allMusic[i].src}`);
 
+liAudioTag.addEventListener("loadeddata",()=>{
+    let audioDuration = liAudioTag.duration,
+            totalmin = Math.floor(audioDuration / 60),
+            totalsec = Math.floor(audioDuration % 60);
+        if (totalsec < 10) { // Helps to properly format seconds if it`s less than 10 
+            totalsec = `0${totalsec}`;
+        }
+        liAudioDuration.innerText = `${totalmin}:${totalsec}`;
+});
+}
