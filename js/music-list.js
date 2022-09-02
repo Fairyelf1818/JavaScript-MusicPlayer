@@ -21,6 +21,6 @@ let allmusic = [
         name: "Nicki - Super Freaky Girl",
         artist: "Nicki Minaj",
         img: "superfreakygirl",
-        src: "superfreakygirl"
+        src: "sfg"
     }    
 ]
