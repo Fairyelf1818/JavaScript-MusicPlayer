@@ -1,11 +1,5 @@
 let allMusic = [
     {
-        name: "Kamikaze",
-        artist: "Eminem",
-        img: "kamikaze",
-        src: "kamikaze"
-    },
-    {
         name: "Bussin",
         artist: "Nicki Minaj",
         img: "bussin",
