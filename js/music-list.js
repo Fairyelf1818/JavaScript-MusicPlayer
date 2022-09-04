@@ -22,5 +22,11 @@ let allMusic = [
         artist: "Nicki Minaj",
         img: "superfreakygirl",
         src: "sfg"
-    }    
+    },
+    {
+        name: "Squash - Peice of Mind",
+        artist: "Squash",
+        img: "peiceofmind",
+        src: "peiceofmind"
+    }
 ]
